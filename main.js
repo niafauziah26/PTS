@@ -25,8 +25,8 @@ import {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export async function ambilDaftarProduk() {
-  const refDokumen = collection(db, "produk");
+export async function ambilDaftarPembeli() {
+  const refDokumen = collection(db, "pembeli");
   const kueri = query(refDokumen, orderBy("nama"));
   const cuplikanKueri = await getDocs(kueri);
 
@@ -47,19 +47,19 @@ export function formatAngka(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-export async function tambahProduk(nama, harga, stok) {
+export async function tambahPembeli(nama, harga, stok) {
   try {
-    const dokRef = await addDoc(collection(db, 'produk'), {
+    const dokRef = await addDoc(collection(db, 'pembeli'), {
       nama: nama,
       harga: harga,
       stok: stok
     });
-    console.log('Berhasil menambah produk ' + dokRef.id);
+    console.log('Berhasil menambah pembeli ' + dokRef.id);
   } catch (e) {
-    console.log('Gagal menambah produk ' + e);
+    console.log('Gagal menambah pembeli ' + e);
   }
 }
 
-export async function hapusProduk(docid) {
-  await deleteDoc(doc(db, "produk", docid));
+export async function hapusPembeli(docid) {
+  await deleteDoc(doc(db, "pembeli", docid));
 }
